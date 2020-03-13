@@ -22,7 +22,65 @@ header {
 .products {
   display: -ms-grid;
   display: grid;
-  -ms-grid-columns: (1fr)[4];
-      grid-template-columns: repeat(4, 1fr);
+  -ms-grid-columns: (minmax(min-content, 300px))[2];
+      grid-template-columns: repeat(2, minmax(-webkit-min-content, 300px));
+      grid-template-columns: repeat(2, minmax(min-content, 300px));
+  grid-gap: 20px;
+  padding: 24px;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+}
+
+.product-item {
+  padding: 20px;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  outline: 2px solid lightgray;
+}
+
+.product-item h3 {
+  margin: 10px 16px;
+}
+
+.product-item a {
+  text-decoration: none;
+}
+
+.product-item a img:hover {
+  outline: 2px solid lightgrey;
+}
+
+.product-item h4 {
+  margin: 10px 16px;
+}
+
+.product-item .buy-btn {
+  background-color: lightgreen;
+  padding: 5px 12px;
+  outline: none;
+  border-radius: 30px;
+  border: 1px solid lightgreen;
+  color: darkorchid;
+}
+
+.product-item .buy-btn:hover {
+  color: lightgreen;
+  border: 1px solid darkorchid;
+  background-color: darkorchid;
+}
+
+.product-item .buy-btn:active {
+  background-color: lightgreen;
+  border: 1px solid lightgreen;
+  color: darkorchid;
 }
 /*# sourceMappingURL=style.css.map */
