@@ -6,6 +6,7 @@ const products = [
 ];
 
 const renderProduct = (id,img,title, price) => {
+    //Добавил id, чтобы потом его не генерить из массива products
     return `<div class="product-item" id="${id}">
                 <h3>${title}</h3>
                 <a href="#"><img src=${img} alt=${title}></a>
@@ -20,10 +21,12 @@ const renderProducts = list => {
     // productList.forEach(item => {
     //     productBox.insertAdjacentHTML('beforeend',item);
     // }); 
+
     //Так будет короче, но мало читабильно...
     // list.map(item => renderProduct(item.id,item.title, item.price)).forEach(item => {
     //     document.querySelector('.products').insertAdjacentHTML('beforeend',item);
-    // }); 
+    // });
+
     //Но вот так, по моему, лучше. Нет смысла создавать промежуточный массив
     list.forEach(item => {
         document.querySelector('.products').insertAdjacentHTML('beforeend',renderProduct(item.id,item.img,item.title, item.price));
