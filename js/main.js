@@ -24,12 +24,23 @@ class ProductList {
             block.insertAdjacentHTML('beforeend', productObject.render());
         }
     }
+
+    getTotal() {
+        let total = 0;
+        for (let item of this.allProducts){
+            total += item.count*item.price;
+        }
+        return total;
+    }
 }
 
 class ProductItem {
     constructor(product, img='https://placehold.it/200x150') {
         this.title = product.title;
         this.price = product.price;
+        //По хорошему нужно ещё поле количество единиц текущего товара
+        //Чтобы в корзине не плодились строки одного и того же товара
+        this.count = 1; 
         this.id = product.id;
         this.img = img;
     }
@@ -46,7 +57,11 @@ class ProductItem {
     }
 }
 
-new ProductList();
+console.log((new ProductList()).getTotal());
+
+/* ProList = new ProductList();
+console.log(ProList.getTotal());
+ */
 /* const products = [
     {id: 1, img: "http://placehold.it/200x150" , title: 'Notebook', price: 20000},
     {id: 2, img: "http://placehold.it/200x150" , title: 'Mouse', price: 1500},
