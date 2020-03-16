@@ -1,4 +1,4 @@
-const products = [
+/* const products = [
     {id: 1, img: "http://placehold.it/200x150" , title: 'Notebook', price: 20000},
     {id: 2, img: "http://placehold.it/200x150" , title: 'Mouse', price: 1500},
     {id: 3, img: "http://placehold.it/200x150" , title: 'Keyboard', price: 5000},
@@ -35,3 +35,4 @@ const renderProducts = list => {
 
 
 renderProducts(products);
+ */
