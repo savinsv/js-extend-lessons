@@ -5,7 +5,7 @@ const products = [
     {id: 4, img: "http://placehold.it/200x150" , title: 'Gamepad', price: 4500},
 ];
 
-const renderProduct = (id,img,title, price) => {
+const renderProduct = ({id,img,title, price}) => {
     //Добавил id, чтобы потом его не генерить из массива products
     return `<div class="product-item" id="${id}">
                 <h3>${title}</h3>
@@ -29,7 +29,7 @@ const renderProducts = list => {
 
     //Но вот так, по моему, лучше. Нет смысла создавать промежуточный массив
     list.forEach(item => {
-        document.querySelector('.products').insertAdjacentHTML('beforeend',renderProduct(item.id,item.img,item.title, item.price));
+        document.querySelector('.products').insertAdjacentHTML('beforeend',renderProduct(item));
     });
 };
 
