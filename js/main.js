@@ -65,7 +65,7 @@ class CartBox {
     constructor(container = '.cartbox'){
         this.items =[];
     }
-    //Добавить продукт в корзину
+    //Добавить продукт в корзину. 
     addItem(product) {
 
     }
@@ -85,11 +85,36 @@ class CartBoxItem {
         this.count = product.count;
         this.price = product.price;
     }
+
+     /**
+     * 
+     * @param {string or number} value
+     * @return {string} key of property 
+     */
+    findKey (value){
+        for (let key in this){
+            if (this[key] === value) return key;
+        }
+        return null;
+    }
+
+    /**
+     * @return {string} HTML представение карточки продукта для корзины
+     */
+    getHTML() {
+        let row = '';
+        row = `<div class='cart-prod-row'>`;
+        for (let element in this) {
+            row += `<div class='col-${this.findKey(this[element])}'>${this[element]}</div>`;
+        };
+        row += `<div class='col-delete'><i class='fas fa-trash-alt'></i></div></div>`;
+        return row;    
+    }
 }
 
+const productList = new ProductList();
 
-
-console.log((new ProductList()).total);
+console.log(productList.total);
 
 //console.log((new ProductList()).getTotal());
 /* ProList = new ProductList();
