@@ -26,6 +26,10 @@ class ProductList {
         }
     }
 
+    _addEventListener() {
+
+    }
+
     /**
      * Возвращает сумму продуктов занесенных в массив allProducts
      */
@@ -65,7 +69,8 @@ class CartBox {
     constructor(container = '.cartbox'){
         this.items =[];
     }
-    //Добавить продукт в корзину. 
+    //Добавить продукт в корзину. Нужно проверить наличие передаваемого товара в корзине.
+    //если товар есть увеличить значение count и пересчитать сумму данного товара.
     addItem(product) {
 
     }
@@ -84,6 +89,7 @@ class CartBoxItem {
         this.title = product.title;
         this.count = product.count;
         this.price = product.price;
+        this.total = this.count * this.price;
     }
 
      /**
