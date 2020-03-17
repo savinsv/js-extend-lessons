@@ -5,6 +5,7 @@ class ProductList {
         this.allProducts = [];
         this._fetchProducts();
         this._render();
+        this.total = this.getTotal();
     }
 
     _fetchProducts() {
@@ -25,6 +26,9 @@ class ProductList {
         }
     }
 
+    /**
+     * Возвращает сумму продуктов занесенных в массив allProducts
+     */
     getTotal() {
         let total = 0;
         for (let item of this.allProducts){
@@ -57,8 +61,37 @@ class ProductItem {
     }
 }
 
-console.log((new ProductList()).getTotal());
+class CartBox {
+    constructor(container = '.cartbox'){
+        this.items =[];
+    }
+    //Добавить продукт в корзину
+    addItem(product) {
 
+    }
+
+    //Удалить продук из корзины. При удалении уменшается count до единицы. 
+    //Если count равен 1, то элемен удаляется из массива
+    delItem(product) {
+
+    }
+
+}
+
+class CartBoxItem {
+    constructor(product) {
+        this.id = product.id;
+        this.title = product.title;
+        this.count = product.count;
+        this.price = product.price;
+    }
+}
+
+
+
+console.log((new ProductList()).total);
+
+//console.log((new ProductList()).getTotal());
 /* ProList = new ProductList();
 console.log(ProList.getTotal());
  */
