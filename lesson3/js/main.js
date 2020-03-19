@@ -15,11 +15,43 @@ const API = 'https://raw.githubusercontent.com/GeekBrainsTutorial/online-store-a
 //   };
 //   xhr.send();
 // };
+class CartBox {
+  constructor(){
+    this.items =[];
+  }
+
+  addItem(product){
+    let itemIdx = this.getItem(product);
+    if (itemIdx >=0 && this.items[itemIdx].count>=1){
+      this.items[itemIdx].count++;
+    } else {
+      this.items.push(product);
+      itemIdx = this.getItem(product);
+      this.items[itemIdx].count = 1;
+    }
+  }
+  delItem(product){
+    const itemIdx = this.getItem(product);
+    if (itemIdx >=0 && this.items[itemIdx].count>1){
+      this.items[itemIdx].count--;
+    } else{
+      this.items.slice(itemIdx,1);
+    }
+  }
+  getItem(product){
+    for (let i=0;i<this.items.length;i++){
+      if (this.items[i].id === product.id){
+        return i;
+      }
+    }
+  }
+}
 
 class ProductList {
   constructor(container = '.products') {
     this.container = container;
     this.goods = [];
+    this.cartBox = new CartBox();
     this.allProducts = [];
     // this._fetchProducts();
     this._getProducts()
@@ -80,8 +112,8 @@ class ProductList {
       buttons[i].addEventListener('click',()=>{
         //id содержит идентификатор товара
         const id = +event.target.parentNode.parentNode.dataset.id;
-        console.log(this.getProductById(id));
-
+        this.cartBox.addItem(this.getProductById(id));
+        //console.log(this.cartBox);
       });
     }
    // console.log(buttons);
