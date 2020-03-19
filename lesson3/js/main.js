@@ -26,6 +26,7 @@ class ProductList {
         .then((data) => {
             this.goods = [...data];
             this.render();
+            this.addListener();
         });
   }
 
@@ -56,6 +57,34 @@ class ProductList {
       this.allProducts.push(productObject);
       block.insertAdjacentHTML('beforeend', productObject.render());
     }
+  }
+  
+  /**
+   * Вернет по id объект товара или null
+   * @param {integer} id
+   * @return {object} ProductItem
+   */
+  getProductById(id){
+    for (let item of this.allProducts) {
+      if (item.id === id) return item; 
+    }
+    return null;
+  }
+
+  /**
+   * Добавим событие click кнопкам товара на странице
+   */
+  addListener() {
+    const buttons = document.querySelector(this.container).getElementsByClassName('buy-btn');
+    for (let i=0;i<buttons.length;i++){
+      buttons[i].addEventListener('click',()=>{
+        //id содержит идентификатор товара
+        const id = +event.target.parentNode.parentNode.dataset.id;
+        console.log(this.getProductById(id));
+
+      });
+    }
+   // console.log(buttons);
   }
 }
 
