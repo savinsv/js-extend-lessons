@@ -16,8 +16,9 @@ const API = 'https://raw.githubusercontent.com/GeekBrainsTutorial/online-store-a
 //   xhr.send();
 // };
 class CartBox {
-  constructor(){
+  constructor(container = '.cart-prod-rows'){
     this.items =[];
+    this.container = container;
   }
 
   addItem(product){
@@ -44,6 +45,24 @@ class CartBox {
         return i;
       }
     }
+  }
+  getTolatlRow(id){
+    this.items[id].total = this.items[id].count * this.items[id].price;
+    return this.items[id].total;
+  }
+
+  getFullTotal(){
+
+  }
+
+  renderRow(){
+
+  }
+  dropRows(){
+
+  }
+  render(){
+
   }
 }
 
