@@ -15,17 +15,69 @@ const API = 'https://raw.githubusercontent.com/GeekBrainsTutorial/online-store-a
 //   };
 //   xhr.send();
 // };
+class CartBox {
+  constructor(container = '.cart-prod-rows'){
+    this.items =[];
+    this.container = container;
+  }
+
+  addItem(product){
+    let itemIdx = this.getItem(product);
+    if (itemIdx >=0 && this.items[itemIdx].count>=1){
+      this.items[itemIdx].count++;
+    } else {
+      this.items.push(product);
+      itemIdx = this.getItem(product);
+      this.items[itemIdx].count = 1;
+    }
+  }
+  delItem(product){
+    const itemIdx = this.getItem(product);
+    if (itemIdx >=0 && this.items[itemIdx].count>1){
+      this.items[itemIdx].count--;
+    } else{
+      this.items.slice(itemIdx,1);
+    }
+  }
+  getItem(product){
+    for (let i=0;i<this.items.length;i++){
+      if (this.items[i].id === product.id){
+        return i;
+      }
+    }
+  }
+  getTolatlRow(id){
+    this.items[id].total = this.items[id].count * this.items[id].price;
+    return this.items[id].total;
+  }
+
+  getFullTotal(){
+
+  }
+
+  renderRow(){
+
+  }
+  dropRows(){
+
+  }
+  render(){
+
+  }
+}
 
 class ProductList {
   constructor(container = '.products') {
     this.container = container;
     this.goods = [];
+    this.cartBox = new CartBox();
     this.allProducts = [];
     // this._fetchProducts();
     this._getProducts()
         .then((data) => {
             this.goods = [...data];
             this.render();
+            this.addListener();
         });
   }
 
@@ -57,13 +109,41 @@ class ProductList {
       block.insertAdjacentHTML('beforeend', productObject.render());
     }
   }
+  
+  /**
+   * Вернет по id объект товара или null
+   * @param {integer} id
+   * @return {object} ProductItem
+   */
+  getProductById(id){
+    for (let item of this.allProducts) {
+      if (item.id === id) return item; 
+    }
+    return null;
+  }
+
+  /**
+   * Добавим событие click кнопкам товара на странице
+   */
+  addListener() {
+    const buttons = document.querySelector(this.container).getElementsByClassName('buy-btn');
+    for (let i=0;i<buttons.length;i++){
+      buttons[i].addEventListener('click',()=>{
+        //id содержит идентификатор товара
+        const id = +event.target.parentNode.parentNode.dataset.id;
+        this.cartBox.addItem(this.getProductById(id));
+        //console.log(this.cartBox);
+      });
+    }
+   // console.log(buttons);
+  }
 }
 
 class ProductItem {
   constructor(product, img='https://placehold.it/200x150') {
-    this.title = product.title;
+    this.title = product.product_name;
     this.price = product.price;
-    this.id = product.id;
+    this.id = product.id_product;
     this.img = img;
   }
 
