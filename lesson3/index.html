@@ -3,13 +3,32 @@
 <head>
     <meta charset="UTF-8">
     <title>Интернет-магазин</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/all.min.css">
     <link rel="stylesheet" href="css/normalize.css">
     <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
     <header>
         <div class="logo">Интернет-магазин</div>
-        <button class="btn-cart" type="button">Корзина</button>
+        <div class="cartBox_wrap">
+            <button class="btn-cart" type="button">Корзина</button>
+            <div class="cart-body">
+                <div class="head-cart-table">
+                    <div class="col-id">№</div>
+                    <div class="col-name">Наименование</div>
+                    <div class="col-cost">Цена</div>
+                    <div class="col-quantity">Кол-во</div>
+                    <div class="col-amount">Сумма</div>
+                    <div class="col-delete"></div>
+                </div>
+                <div class="cart-prod-rows"></div>
+                <div class="footer-cart-table">
+                    <div class="col-totalcap">Итого:</div>
+                    <div class="col-totalmoney">0.00 <span></span></div>
+                </div>
+            </div>
+        </div>
+
     </header>
     <main>
         <div class="products"></div>
