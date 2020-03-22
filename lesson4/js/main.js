@@ -73,16 +73,23 @@ class CartBox {
       this.items.push(product);
       itemIdx = this.getItem(product);
       this.items[itemIdx].count = 1;
+
     }
+    this.getTolatlRow(itemIdx);
   }
+
   delItem(product){
     const itemIdx = this.getItem(product);
     if (itemIdx >=0 && this.items[itemIdx].count>1){
       this.items[itemIdx].count--;
+      this.getTolatlRow(itemIdx);
     } else{
-      this.items.slice(itemIdx,1);
+      this.items.splice(itemIdx,1);
     }
+    console.log(this);
+    this.render();
   }
+
   getItem(product){
     for (let i=0;i<this.items.length;i++){
       if (this.items[i].id === product.id){
@@ -96,17 +103,51 @@ class CartBox {
   }
 
   getFullTotal(){
-
+    const block = document.querySelector('.col-totalmoney');
+    block.innerHTML = this.items.reduce((accum, item) => accum += item.total, 0) + ' \u20bd';
   }
 
-  renderRow(){
-
+  renderRow(product){
+    return `<div class='cart-prod-row'>
+              <div class="col-id">${product.id}</div>
+              <div class="col-name">${product.title}</div>
+              <div class="col-cost">${product.price}</div>
+              <div class="col-quantity">${product.count}</div>
+              <div class="col-amount">${product.total} \u20bd</div>
+              <div class='col-delete'><i class='fas fa-trash-alt'></i></div>
+            </div>`;
   }
+
   dropRows(){
-
+    const block = document.querySelector(this.container);
+    block.innerHTML = '';
   }
-  render(){
 
+  getProductById(id){
+    for (let item of this.items) {
+      if (item.id === id) return item; 
+    }
+    return null;
+  }
+
+  addEvent(){
+    const delBtns = document.querySelector(this.container).getElementsByClassName('fa-trash-alt');
+    for (let delBtn of delBtns){
+      delBtn.addEventListener('click',(event) =>{
+        let id =+event.target.parentNode.parentNode.querySelector('.col-id').innerHTML; //dataset.id;
+        this.delItem(this.getProductById(id));
+      });
+    };
+  }
+
+  render(){
+    this.dropRows();
+    const block = document.querySelector(this.container);
+    for (let product of this.items) {
+      block.insertAdjacentHTML('beforeend', this.renderRow(product));
+    }
+    this.addEvent();
+    this.getFullTotal();
   }
 }
 
@@ -173,9 +214,10 @@ class ProductList {
     const buttons = document.querySelector(this.container).getElementsByClassName('buy-btn');
     for (let i=0;i<buttons.length;i++){
       buttons[i].addEventListener('click',()=>{
-        //id содержит идентификатор товара
+        //id содержит идентификатор товара на котором нажали кнопку "Купить"
         const id = +event.target.parentNode.parentNode.dataset.id;
         this.cartBox.addItem(this.getProductById(id));
+        this.cartBox.render();
         //console.log(this.cartBox);
       });
     }
@@ -204,4 +246,12 @@ class ProductItem {
 }
 
 new ProductList();
-
+document.querySelector('.btn-cart').addEventListener('click',(event)=>{
+  let showCart = document.querySelector('.cart-body');
+ // console.log(getComputedStyle(showCart).visibility);
+ if (getComputedStyle(showCart).visibility === 'hidden') {
+    showCart.style.visibility = 'visible';
+ } else {
+    showCart.style.visibility = 'hidden';
+ }
+});

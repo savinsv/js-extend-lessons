@@ -20,10 +20,6 @@ header {
   color: #2f2a2d;
 }
 
-.cartBox_wrap:hover .cart-body {
-  visibility: visible;
-}
-
 .cart-body {
   position: absolute;
   visibility: hidden;
@@ -42,6 +38,15 @@ header {
           flex-direction: column;
   -ms-flex-line-pack: center;
       align-content: center;
+}
+
+.col-delete {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
 }
 
 .head-cart-table {
