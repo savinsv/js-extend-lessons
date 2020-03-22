@@ -259,6 +259,22 @@ document.querySelector('.btn-cart').addEventListener('click',(event)=>{
 });
 
 
+//Разобрать маску проверки номера
+const telRegexp = /^(\s*)?(\+)?([- _():=+]?\d[- _():=+]?){10,14}(\s*)?$/;
+
+document.getElementById('btn-feedback').addEventListener('click',(event)=>{
+  if (event.target.dataset.show === 'no'){
+    document.querySelector('.feedback').style.display = "flex";
+    event.target.dataset.show = "yes";
+    event.target.innerHTML = "Отправить";
+  }else {
+    document.querySelector('.feedback').style.display = "none";
+    event.target.dataset.show = "no";
+    event.target.innerHTML = "Напишите нам...";
+  }
+});
+
+
 //Задание урока 4
 //Регулярные выражения
 const anyText = `One: 'Hi Mary.' Two: 'Oh, hi.'

@@ -43,15 +43,15 @@
         <div class="feedbackBox">
             <div class="feedback">
                 <label for="name">Имя</label>
-                <input type="text" name="name" id="name">
+                <input type="text" name="name" id="name" placeholder="Введите Имя. Только буквы">
                 <label for="tel">Телефон</label>
-                <input type="tel" name="tel" id="tel">
+                <input type="text" name="tel" id="tel" placeholder="+7(000)000-0000">
                 <label for="email">e-mail</label>
-                <input type="email" name="email" id="email">
+                <input type="text" name="email" id="email" placeholder="vasiliy@domen.com">
                 <p>Введите текст сообщения</p>
                 <textarea class="message" name="message"></textarea>
            </div>
-           <button>Напишите нам</button>
+           <button id="btn-feedback" data-show="no">Напишите нам...</button>
         </div>
     <script src="js/main.js"></script>
 </body>

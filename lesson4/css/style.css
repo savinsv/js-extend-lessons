@@ -1,5 +1,6 @@
 body {
   font-family: 'SF Pro Display', sans-serif;
+  height: 100vh;
 }
 
 header {
@@ -15,13 +16,17 @@ header {
   position: relative;
 }
 
+main {
+  height: 80vh;
+}
+
 .cartBox_wrap {
   padding-bottom: 10px;
   color: #2f2a2d;
 }
 
 .feedbackBox {
-  height: 60px;
+  height: 40px;
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -32,7 +37,7 @@ header {
   -webkit-box-align: center;
       -ms-flex-align: center;
           align-items: center;
-  padding: 20px;
+  padding: 10px;
   position: relative;
 }
 
@@ -41,9 +46,7 @@ header {
   z-index: 2;
   top: -300px;
   width: 400px;
-  display: -webkit-box;
-  display: -ms-flexbox;
-  display: flex;
+  display: none;
   -webkit-box-orient: vertical;
   -webkit-box-direction: normal;
       -ms-flex-direction: column;
@@ -68,6 +71,10 @@ header {
   height: 100px;
   width: 100%;
   outline: none;
+}
+
+#btn-feedback {
+  margin-top: 12px;
 }
 
 .cart-body {
