@@ -260,7 +260,16 @@ document.querySelector('.btn-cart').addEventListener('click',(event)=>{
 
 
 //Разобрать маску проверки номера
-const telRegexp = /^(\s*)?(\+)?([- _():=+]?\d[- _():=+]?){10,14}(\s*)?$/;
+//сложный шаблон с различными вариантами грппировки
+// /^(\s*)?(\+)?([- _():=+]?\d[- _():=+]?){10,14}(\s*)?$/
+// Нам подойдет этот для проверки телефона по формату из задания
+const telRegexp = /^(\+)?(\(?\d[-)]?){10,14}$/;
+//для проверки имени - этот. 4 символа минимум, максимум 20. 
+const nameRegexp = /^[a-zA-Zа-яА-Я]{4,20}$/; //или /^[a-zа-я]{4,20}$/i
+//Для проверки e-mail подойдет это шаблон
+const emailRegexp = /^[a-z]{1,}[a-z\.-]{2,}\@[a-z\.]{2,}$/i;
+//Для простого текста подойдет этот.
+const textRegexp = /^.*$/i;
 
 document.getElementById('btn-feedback').addEventListener('click',(event)=>{
   if (event.target.dataset.show === 'no'){
@@ -268,9 +277,38 @@ document.getElementById('btn-feedback').addEventListener('click',(event)=>{
     event.target.dataset.show = "yes";
     event.target.innerHTML = "Отправить";
   }else {
-    document.querySelector('.feedback').style.display = "none";
-    event.target.dataset.show = "no";
-    event.target.innerHTML = "Напишите нам...";
+    for (elem of document.getElementsByClassName('check')){
+      switch(elem.name){
+        case 'name':
+          console.log(nameRegexp.test(elem.value));
+          let error = elem.nextElementSibling;
+          let test = nameRegexp.test(elem.value) ;
+          test ? elem.classList.remove("invalid") : elem.classList.add("invalid");
+          if (!test) {
+            //email.className = "invalid";
+            error.innerHTML = "Для ввода используйте только буквы!!!!";
+            error.className = "error active";
+          } else {
+           // email.className = "valid";
+            error.innerHTML = "";
+            error.className = "error";
+          }
+        
+          break;
+        case 'tel':
+          console.log(telRegexp.test(elem.value));
+          break;
+        case 'email':
+          console.log(emailRegexp.test(elem.value));
+          break;
+        case 'message':
+          console.log(textRegexp.test(elem.value));
+          break;
+      }
+    }
+    // document.querySelector('.feedback').style.display = "none";
+    // event.target.dataset.show = "no";
+    // event.target.innerHTML = "Напишите нам...";
   }
 });
 
