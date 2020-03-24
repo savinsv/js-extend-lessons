@@ -259,6 +259,8 @@ document.querySelector('.btn-cart').addEventListener('click',(event)=>{
 });
 
 
+//Форма валидации
+
 //Разобрать маску проверки номера
 //сложный шаблон с различными вариантами грппировки
 // /^(\s*)?(\+)?([- _():=+]?\d[- _():=+]?){10,14}(\s*)?$/
@@ -269,7 +271,25 @@ const nameRegexp = /^[a-zA-Zа-яА-Я]{4,20}$/; //или /^[a-zа-я]{4,20}$/i
 //Для проверки e-mail подойдет это шаблон
 const emailRegexp = /^[a-z]{1,}[a-z\.-]{2,}\@[a-z\.]{2,}$/i;
 //Для простого текста подойдет этот.
-const textRegexp = /^.*$/i;
+const textRegexp = /^.{1,}$/i;
+/**Функция проверки и показа сообщений об ошибке валидации поля
+ * 
+ * @param {Input} elem Элемент валидацию, которого проверяем 
+ * @param {regexp} regexp Шаблон для проверки
+ */
+function checkInput(elem, regexp){
+  let error = elem.nextElementSibling;
+  let test = regexp.test(elem.value) ;
+  test ? elem.classList.remove("invalid") : elem.classList.add("invalid");
+  if (!test) {
+    error.innerHTML = "Поле выше заполнено не корректно. Используйте подсказку.";
+    error.className = "error active";
+  } else {
+    error.innerHTML = "";
+    error.className = "error";
+  }
+
+};
 
 document.getElementById('btn-feedback').addEventListener('click',(event)=>{
   if (event.target.dataset.show === 'no'){
@@ -281,31 +301,45 @@ document.getElementById('btn-feedback').addEventListener('click',(event)=>{
       switch(elem.name){
         case 'name':
           console.log(nameRegexp.test(elem.value));
-          let error = elem.nextElementSibling;
-          let test = nameRegexp.test(elem.value) ;
-          test ? elem.classList.remove("invalid") : elem.classList.add("invalid");
-          if (!test) {
-            //email.className = "invalid";
-            error.innerHTML = "Для ввода используйте только буквы!!!!";
-            error.className = "error active";
-          } else {
-           // email.className = "valid";
-            error.innerHTML = "";
-            error.className = "error";
-          }
-        
+          // let error = elem.nextElementSibling;
+          // let test = nameRegexp.test(elem.value) ;
+          // test ? elem.classList.remove("invalid") : elem.classList.add("invalid");
+          // if (!test) {
+          //   error.innerHTML = "Для ввода используйте только буквы!!!!";
+          //   error.className = "error active";
+          // } else {
+          //  // email.className = "valid";
+          //   error.innerHTML = "";
+          //   error.className = "error";
+          // }
+          checkInput(elem,nameRegexp);
           break;
         case 'tel':
           console.log(telRegexp.test(elem.value));
+          checkInput(elem,telRegexp);
           break;
         case 'email':
           console.log(emailRegexp.test(elem.value));
+          checkInput(elem,emailRegexp);
           break;
         case 'message':
           console.log(textRegexp.test(elem.value));
+          checkInput(elem,textRegexp);
           break;
       }
     }
+    let isValid = true;
+    for (elem of document.getElementsByClassName('check')){
+      if (elem.classList.contains("invalid")){
+          isValid = false;
+          break;
+      } 
+    }
+    if (isValid)  {        
+      document.querySelector('.feedback').style.display = "none";
+      event.target.dataset.show = "no";
+      event.target.innerHTML = "Напишите нам...";
+    } ;
     // document.querySelector('.feedback').style.display = "none";
     // event.target.dataset.show = "no";
     // event.target.innerHTML = "Напишите нам...";
