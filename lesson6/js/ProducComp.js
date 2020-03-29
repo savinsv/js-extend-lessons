@@ -9,8 +9,11 @@ Vue.component('products', {
     },
     methods: {
         filter(){
-            let regexp = new RegExp(this.userSearch, 'i');
-            this.filtered = this.products.filter(el => regexp.test(el.product_name));
+            //let regexp = new RegExp(this.userSearch, 'i');
+            //this.filtered = this.products.filter(el => regexp.test(el.product_name));
+            this.filtered = this.$root.$refs.search.getFilter(this.products);
+    //        console.log(this.filtered);
+            console.log(this.$root.$refs);
         }
     },
     mounted(){
@@ -18,8 +21,9 @@ Vue.component('products', {
             .then(data => {
                 for(let el of data){
                     this.products.push(el);
-                    this.filtered.push(el);
+                  //  this.filtered.push(el);
                 }
+                this.filter();
             });
     },
     template: `
@@ -43,7 +47,7 @@ Vue.component('product', {
 
     template: `
     <div class="product-item">
-                <img :src="img" alt="Some img">
+                <img :src="img" :alt="product.product_name">
                 <div class="desc">
                     <h3>{{product.product_name}}</h3>
                     <p>{{product.price}}₽</p>
