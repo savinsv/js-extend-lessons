@@ -13,7 +13,7 @@ Vue.component('products', {
             //this.filtered = this.products.filter(el => regexp.test(el.product_name));
             this.filtered = this.$root.$refs.search.getFilter(this.products);
     //        console.log(this.filtered);
-            console.log(this.$root.$refs);
+     //       console.log(this.$root.$refs);
         }
     },
     mounted(){
