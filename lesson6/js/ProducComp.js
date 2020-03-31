@@ -27,8 +27,9 @@ Vue.component('products', {
             });
     },
     template: `
-        <div class="products">
+        <div class="products" >
             <product ref="refref" v-for="item of filtered" :key="item.id_product" :img="imgCatalog" :product="item"></product>
+                <error ref="refref" v-if="!filtered.length"></error> 
         </div>
     `
 });
