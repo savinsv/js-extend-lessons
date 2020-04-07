@@ -17,7 +17,7 @@ app.get('/api/products', (req, res) => {
 //  fs.readFile('./server/db/products.json', 'utf-8', (err, data) => {
   fs.readFile(path.join(__dirname,'db/products.json'), 'utf-8', (err, data) => {
     if (err) {
-      console.log(err);
+//      console.log(err);
       res.send(JSON.stringify({result: 0, text: err}));
       // res.sendStatus(404, JSON.stringify({result: 0, text: err}));
     } else {
