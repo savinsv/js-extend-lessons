@@ -5,7 +5,7 @@ Vue.component('products', {
             products: [],
             filtered: [],
             imgCatalog: 'https://placehold.it/200x150',
-        }
+        };
     },
     methods: {
         filter(value){

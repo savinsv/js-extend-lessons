@@ -21,7 +21,7 @@ const handler = (req, res, action, file) => {
           loger(product,action);
           res.send('{"result": 1}');
         }
-      })
+      });
     }
   });
 };

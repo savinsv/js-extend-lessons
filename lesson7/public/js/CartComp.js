@@ -5,7 +5,7 @@ Vue.component('cart', {
           cartUrl: '/getBasket.json',
           cartItems: [],
           showCart: false,
-      }
+      };
     },
     methods: {
 

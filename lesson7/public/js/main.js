@@ -11,7 +11,7 @@ const app = new Vue({
                 .then(result => result.json())
                 .catch(error => {
                     this.$refs.error.setError(error);
-                })
+                });
         },
         postJson(url, data) {
             return fetch(url, {

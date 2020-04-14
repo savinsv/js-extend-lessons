@@ -2,16 +2,16 @@ Vue.component('error', {
     data(){
         return {
             text: ''
-        }
+        };
     },
     methods: {
       setError(error){
-          this.text = error
+          this.text = error;
       }
     },
     computed: {
       isVisible(){
-          return this.text !== ''
+          return this.text !== '';
       }
     },
     template: `
