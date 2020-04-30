@@ -1,0 +1,38 @@
+[
+    {
+        "Datetime": "7-3-2020 16:34:21",
+        "Product": {
+            "id_product": 123,
+            "product_name": "Ноутбук",
+            "quantity": 1
+        },
+        "action": "add"
+    },
+    {
+        "Datetime": "7-3-2020 16:35:7",
+        "Product": {
+            "id_product": 457,
+            "product_name": "Gamepad",
+            "quantity": 1
+        },
+        "action": "add"
+    },
+    {
+        "Datetime": "7-3-2020 16:35:13",
+        "Product": {
+            "id_product": 124,
+            "product_name": "Keyboard",
+            "quantity": 1
+        },
+        "action": "add"
+    },
+    {
+        "Datetime": "7-3-2020 16:35:30",
+        "Product": {
+            "id_product": 456,
+            "product_name": "Мышка",
+            "quantity": 1
+        },
+        "action": "del"
+    }
+]
